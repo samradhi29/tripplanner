@@ -22,7 +22,7 @@ import axios from 'axios';
 import { useState } from 'react';
 
 const fetchPackages = async () => {
-  const response = await axios.get('http://localhost:5000/api/packages/top-selling');
+  const response = await axios.get('https://tripplanner1-tqlc.onrender.com/api/packages/top-selling');
   return response.data;
 };
 
