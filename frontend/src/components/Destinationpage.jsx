@@ -14,7 +14,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const fetchDestinations = async () => {
-  const response = await axios.get('https://tripplanner1-tqlc.onrender.com/api/destinations');
+  const response = await axios.get('http://localhost:5000/api/destinations');
   return response.data;
 };
 
@@ -44,20 +44,20 @@ export default function Destinationpage() {
     <Box
       sx={{
         textAlign: 'center',
-        mt: 10,
-        px: 2,
+        mt: 12,
+        px: 4,
         backgroundColor: '#f8f9fa',
         minHeight: '100vh',
-        paddingBottom: 6,
+        paddingBottom: 8,
       }}
     >
       <Typography
-        variant="h4"
+        variant="h3"  // increased variant size
         sx={{
           color: '#008080',
           fontWeight: 'bold',
-          mb: 2,
-          fontSize: { xs: '1.8rem', md: '2.5rem' },
+          mb: 3,
+          fontSize: { xs: '2.4rem', md: '3.5rem' }, // increased font size
         }}
       >
         Explore Most Popular Destinations
@@ -67,10 +67,11 @@ export default function Destinationpage() {
         variant="body1"
         sx={{
           color: 'text.secondary',
-          maxWidth: 600,
+          maxWidth: 700,
           mx: 'auto',
-          mb: 6,
-          lineHeight: 1.6,
+          mb: 8,
+          lineHeight: 1.8,
+          fontSize: { xs: '1.2rem', md: '1.4rem' }, // bigger text
         }}
       >
         Plan your perfect trip with our most loved and best-selling
@@ -79,40 +80,40 @@ export default function Destinationpage() {
       </Typography>
 
       {isLoading && (
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-          <CircularProgress sx={{ color: '#008080' }} />
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 5 }}>
+          <CircularProgress sx={{ color: '#008080', width: 60, height: 60 }} /> {/* bigger spinner */}
         </Box>
       )}
 
       {isError && (
-        <Typography color="error" mt={2} sx={{ fontSize: '1.1rem' }}>
+        <Typography color="error" mt={3} sx={{ fontSize: '1.3rem' }}>
           Failed to load destinations.
         </Typography>
       )}
 
       {data && data.length > 0 && (
-        <Box sx={{ position: 'relative', maxWidth: 1200, mx: 'auto' }}>
+        <Box sx={{ position: 'relative', maxWidth: 1400, mx: 'auto' }}>
           {/* Left Arrow */}
           <IconButton
             onClick={handlePrevious}
             sx={{
               position: 'absolute',
-              left: -50,
+              left: -70,
               top: '50%',
               transform: 'translateY(-50%)',
               zIndex: 2,
               backgroundColor: 'white',
               boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-              width: 50,
-              height: 50,
+              width: 70,
+              height: 70,
               '&:hover': {
                 backgroundColor: '#f5f5f5',
-                transform: 'translateY(-50%) scale(1.1)',
+                transform: 'translateY(-50%) scale(1.15)',
               },
               transition: 'all 0.3s ease',
             }}
           >
-            <ArrowBackIos sx={{ color: '#008080', fontSize: 20 }} />
+            <ArrowBackIos sx={{ color: '#008080', fontSize: 28 }} />
           </IconButton>
 
           {/* Right Arrow */}
@@ -120,49 +121,49 @@ export default function Destinationpage() {
             onClick={handleNext}
             sx={{
               position: 'absolute',
-              right: -50,
+              right: -70,
               top: '50%',
               transform: 'translateY(-50%)',
               zIndex: 2,
               backgroundColor: 'white',
               boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-              width: 50,
-              height: 50,
+              width: 70,
+              height: 70,
               '&:hover': {
                 backgroundColor: '#f5f5f5',
-                transform: 'translateY(-50%) scale(1.1)',
+                transform: 'translateY(-50%) scale(1.15)',
               },
               transition: 'all 0.3s ease',
             }}
           >
-            <ArrowForwardIos sx={{ color: '#008080', fontSize: 20 }} />
+            <ArrowForwardIos sx={{ color: '#008080', fontSize: 28 }} />
           </IconButton>
 
           {/* Destinations Grid */}
-          <Grid container spacing={3} justifyContent="center">
+          <Grid container spacing={4} justifyContent="center">
             {currentDestinations.map((destination) => (
               <Grid item key={destination.id} xs={12} sm={6} md={4} lg={4}>
                 <Card
                   sx={{
-                    maxWidth: 300,
+                    maxWidth: 350, // increased width
                     margin: 'auto',
-                    borderRadius: 3,
+                    borderRadius: 4,
                     overflow: 'hidden',
                     cursor: 'pointer',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                    boxShadow: '0 6px 25px rgba(0,0,0,0.12)',
                     display: 'flex',
                     flexDirection: 'column',
                     height: '100%',
                     transition: 'all 0.3s ease',
                     '&:hover': {
-                      transform: 'translateY(-4px)',
-                      boxShadow: '0 8px 25px rgba(0,0,0,0.15)',
+                      transform: 'translateY(-6px)',
+                      boxShadow: '0 10px 35px rgba(0,0,0,0.18)',
                     },
                   }}
                 >
                   <CardMedia
                     component="img"
-                    height="240"
+                    height="280" // taller images
                     image={
                       destination.image ||
                       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop&crop=center'
@@ -177,19 +178,19 @@ export default function Destinationpage() {
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      px: 2,
-                      py: 1.5,
+                      px: 3,
+                      py: 2,
                       flexGrow: 1,
                     }}
                   >
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <FaMapMarkerAlt size={16} color="#008080" />
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                      <FaMapMarkerAlt size={18} color="#008080" />
                       <Typography
                         variant="h6"
                         sx={{
                           color: '#008080',
                           fontWeight: 'bold',
-                          fontSize: '1rem',
+                          fontSize: '1.2rem',
                           textAlign: 'left',
                         }}
                       >
@@ -202,25 +203,25 @@ export default function Destinationpage() {
                         variant="body2"
                         sx={{
                           color: '#666',
-                          fontSize: '0.8rem',
-                          mb: 0.5,
+                          fontSize: '0.9rem',
+                          mb: 0.7,
                         }}
                       >
                         Starting From
                       </Typography>
                       <Typography
-                        variant="h6"
+                        variant="h5"
                         sx={{
                           color: '#008080',
                           fontWeight: 'bold',
-                          fontSize: '1.1rem',
+                          fontSize: '1.4rem',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'flex-end',
-                          gap: 0.5,
+                          gap: 0.7,
                         }}
                       >
-                        <FaRupeeSign size={14} />
+                        <FaRupeeSign size={18} />
                         {destination.price}
                       </Typography>
                     </Box>
@@ -232,14 +233,14 @@ export default function Destinationpage() {
 
           {/* Page Indicators */}
           {totalPages > 1 && (
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4, gap: 1 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 5, gap: 1.5 }}>
               {Array.from({ length: totalPages }).map((_, index) => (
                 <Box
                   key={index}
                   onClick={() => setCurrentPage(index)}
                   sx={{
-                    width: 12,
-                    height: 12,
+                    width: 16,
+                    height: 16,
                     borderRadius: '50%',
                     backgroundColor: currentPage === index ? '#008080' : '#ccc',
                     cursor: 'pointer',
